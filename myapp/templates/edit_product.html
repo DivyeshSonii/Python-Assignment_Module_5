@@ -1,0 +1,71 @@
+{% extends 'header&footer.html' %}
+{% load static %}
+{% block content %}
+<div class="container tm-mt-big tm-mb-big">
+  <div class="row">
+    <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+      <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="tm-block-title d-inline-block">Edit Product</h2>
+          </div>
+        </div>
+        <div class="row tm-edit-product-row">
+
+          <div class="col-xl-6 col-lg-6 col-md-12">
+            <form action="/edit_product/{{all_p.id}}" method="POST" class="tm-edit-product-form"
+              enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group mb-3">
+                <label for="name">ID : {{all_p.id}} </label>
+                <br>
+                <label for="name">Product Name </label>
+                <input id="name" name="name" type="text" value="{{all_p.p_name.product_name}}"
+                  class="form-control validate" />
+              </div>
+              <div class="row">
+                <div class="form-group mb-3 col-xs-12 col-sm-6">
+                  <label for="expire_date">Product Model
+                  </label>
+                  <input id="expire_date" name="model" type="text" value="{{all_p.product_model}}"
+                    class="form-control validate" data-large-mode="true" />
+                </div>
+                <div class="form-group mb-3 col-xs-12 col-sm-6">
+                  <label for="stock">Product RAM (GB)
+                  </label>
+                  <input id="stock" name="ram" type="text" value="{{all_p.product_ram}}"
+                    class="form-control validate" />
+                </div>
+                <div class="form-group mb-3 col-xs-12 col-sm-6">
+                  <label for="expire_date">Product price
+                  </label>
+                  <input id="expire_date" name="price" type="text" value="{{all_p.product_price}}"
+                    class="form-control validate" data-large-mode="true" />
+                </div>
+              </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+            <div class="tm-product-img-edit mx-auto">
+              <img src="{{all_p.product_image.url}}" alt="Product image" class="img-fluid d-block mx-auto">
+              <i class="fas fa-cloud-upload-alt tm-upload-icon"
+                onclick="document.getElementById('fileInput').click();"></i>
+            </div>
+            <div class="custom-file mt-3 mb-3">
+              <input id="fileInput" name="p_image" type="file" style="display:none;" />
+              <input type="button" class="btn btn-primary btn-block mx-auto" value="CHANGE IMAGE NOW"
+                onclick="document.getElementById('fileInput').click();" />
+            </div>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block text-uppercase">Update Now</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% endblock %}
